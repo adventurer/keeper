@@ -1,0 +1,10 @@
+{
+    "WorkingDir": "./",
+    "SourceDir": [
+        "./"
+    ],
+    "SourceExt": [".go",".html",".json"],
+    "BuildCmd": "",
+    "RunCmd": "keeper -name=不可用测试节点 -ip=47.90.62.113 -port=13389",
+    "Decreasing": 1
+}

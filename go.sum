@@ -1,0 +1,4 @@
+github.com/kirinlabs/HttpRequest v1.0.5 h1:1bWj23Tzxm5Zyzm3YURa+ujnBXoXiIbsQq3K9U4SP8s=
+github.com/kirinlabs/HttpRequest v1.0.5/go.mod h1:XV38fA4rXZox83tlEV9KIQ7Cdsut319x6NGzVLuRlB8=
+github.com/shirou/gopsutil v2.20.7+incompatible h1:Ymv4OD12d6zm+2yONe39VSmp2XooJe8za7ngOLW/o/w=
+github.com/shirou/gopsutil v2.20.7+incompatible/go.mod h1:5b4v6he4MtMOwMlS0TUMTu2PcXUg8+E1lC7eC3UO/RA=
