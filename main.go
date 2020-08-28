@@ -1,18 +1,15 @@
 package main
 
 import (
-	"bytes"
 	"crypto/md5"
 	"encoding/hex"
 	"encoding/json"
 	"flag"
-	"fmt"
 	"io/ioutil"
 	"keeper/config"
 	"keeper/postdata"
 	"keeper/traffic"
 	"log"
-	"os/exec"
 	"strconv"
 	"time"
 )
@@ -53,18 +50,18 @@ func main() {
 		log.Fatal(err.Error())
 	}
 	log.Println(string(cfgString))
-	ioutil.WriteFile("/etc/shadowsocks-libev/config.json", cfgString, 0666)
+	ioutil.WriteFile("config.json", cfgString, 0666)
 
-	var outInfo bytes.Buffer
-	cmd := exec.Command("/etc/init.d/shadowsocks-libev", "restart")
+	// var outInfo bytes.Buffer
+	// cmd := exec.Command("/etc/init.d/shadowsocks-libev", "restart")
 
-	// 设置接收
-	cmd.Stdout = &outInfo
+	// // 设置接收
+	// cmd.Stdout = &outInfo
 
-	// 执行
-	cmd.Run()
+	// // 执行
+	// cmd.Run()
 
-	fmt.Println(outInfo.String())
+	// fmt.Println(outInfo.String())
 
 	// /etc/init.d/shadowsocks-libev restart
 	go traffic.Init()
