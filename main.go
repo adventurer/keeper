@@ -46,7 +46,7 @@ func main() {
 
 	postdata.Content.SetInfo(config.Config.Name, config.Config.Ip, strconv.Itoa(config.Config.Port), pass)
 
-	cfg := serverConfig{Server: "0.0.0.0", Server_port: 10089, Local_port: 1080, Password: pass, Timeout: 60, Method: "chacha20-ietf-poly1305"}
+	cfg := serverConfig{Server: "0.0.0.0", Server_port: config.Config.Port, Local_port: 1080, Password: pass, Timeout: 60, Method: "chacha20-ietf-poly1305"}
 	cfgString, err := json.Marshal(cfg)
 	if err != nil {
 		log.Fatal(err.Error())
