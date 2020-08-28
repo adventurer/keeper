@@ -42,13 +42,16 @@ func main() {
 		log.Fatal("服务器端口必须")
 	}
 
-	postdata.Content.SetInfo(config.Config.Name, config.Config.Ip, strconv.Itoa(config.Config.Port), config.Config.Pass)
+	pass := randomStr()
 
-	cfg := serverConfig{Server: "0.0.0.0", Server_port: 10089, Local_port: 1080, Password: randomStr(), Timeout: 60, Method: "chacha20-ietf-poly1305"}
+	postdata.Content.SetInfo(config.Config.Name, config.Config.Ip, strconv.Itoa(config.Config.Port), pass)
+
+	cfg := serverConfig{Server: "0.0.0.0", Server_port: 10089, Local_port: 1080, Password: pass, Timeout: 60, Method: "chacha20-ietf-poly1305"}
 	cfgString, err := json.Marshal(cfg)
 	if err != nil {
 		log.Fatal(err.Error())
 	}
+
 	log.Println(string(cfgString))
 	ioutil.WriteFile("/root/keeper/config.json", cfgString, 0666)
 
