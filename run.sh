@@ -2,7 +2,7 @@
 
 # start 1
 echo "begin keeper..."
-/root/keeper/keeper -name=$SERVERNAME -ip=$IP -port=10089 > /var/log/keeper.log 2>&1 &
+/root/keeper/keeper -name=$SERVERNAME -ip=$IP -port=$SERVERPORT > /var/log/keeper.log 2>&1 &
 echo "wait for 5 second..."
 sleep 5
 echo "begin ss-server..."
