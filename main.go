@@ -8,7 +8,6 @@ import (
 	"io/ioutil"
 	"keeper/config"
 	"keeper/postdata"
-	"keeper/traffic"
 	"log"
 	"strconv"
 	"time"
@@ -22,6 +21,8 @@ type serverConfig struct {
 	Timeout     int    `json:"timeout"`
 	Method      string `json:"method"`
 }
+
+var pause = make(chan int)
 
 func main() {
 	flag.StringVar(&config.Config.Name, "name", "", "name need")
@@ -67,10 +68,11 @@ func main() {
 	// fmt.Println(outInfo.String())
 
 	// /etc/init.d/shadowsocks-libev restart
-	go traffic.Init()
+	// go traffic.Init()
 
-	go postdata.Init()
-	time.Sleep(1 * time.Hour)
+	// go postdata.Init()
+
+	<-pause
 }
 
 func randomStr() string {
