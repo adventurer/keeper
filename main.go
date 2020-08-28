@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"keeper/config"
 	"keeper/postdata"
+	"keeper/traffic"
 	"log"
 	"strconv"
 	"time"
@@ -68,9 +69,9 @@ func main() {
 	// fmt.Println(outInfo.String())
 
 	// /etc/init.d/shadowsocks-libev restart
-	// go traffic.Init()
+	go traffic.Init()
 
-	// go postdata.Init()
+	go postdata.Init()
 
 	<-pause
 }
