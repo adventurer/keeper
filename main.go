@@ -41,7 +41,7 @@ func main() {
 		log.Fatal("服务器ip必须")
 	}
 
-	if config.Config.Port == 0 {git a
+	if config.Config.Port == 0 {
 		log.Fatal("服务器端口必须")
 	}
 
