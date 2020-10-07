@@ -29,7 +29,7 @@ func main() {
 	flag.StringVar(&config.Config.Name, "name", "", "name need")
 	flag.StringVar(&config.Config.Ip, "ip", "", "ip need")
 	flag.IntVar(&config.Config.Port, "port", 0, "port need")
-	flag.IntVar(&config.Config.BankWidth, "bankwidth", 0, "bandwidth need")
+	flag.IntVar(&config.Config.BandWidth, "bankwidth", 0, "bandwidth need")
 
 	flag.Parse()
 
