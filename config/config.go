@@ -1,8 +1,9 @@
 package config
 
 var Config struct {
-	Name string
-	Ip   string
-	Port int
-	Pass string
+	Name      string
+	Ip        string
+	Port      int
+	Pass      string
+	BankWidth int
 }

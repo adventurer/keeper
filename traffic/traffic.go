@@ -1,6 +1,7 @@
 package traffic
 
 import (
+	"keeper/config"
 	"keeper/postdata"
 	"time"
 
@@ -30,7 +31,7 @@ func Init() {
 				}
 				if i%5 == 0 {
 					// log.Println("set traffic...")
-					postdata.Content.SetTraffic(recive/1024*8/5, send/1024*8/5)
+					postdata.Content.SetTraffic(recive/1024*8/float64(config.Config.BankWidth), send/1024*8/5)
 					recive = 0
 					send = 0
 				}

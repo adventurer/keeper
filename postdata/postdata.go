@@ -1,6 +1,7 @@
 package postdata
 
 import (
+	"keeper/config"
 	"log"
 	"sync"
 	"time"
@@ -52,7 +53,7 @@ func (p *ReportData) SetTraffic(recive, send uint64) {
 	p.lock.Lock()
 	p.Recive = recive
 	p.Send = send
-	p.Load = float64(send) / (5 * 1024)
+	p.Load = float64(send) / (float64(config.Config.BankWidth) * 1024)
 }
 
 func (p *ReportData) SetInfo(Name, Ip, Port, Pass string) {
