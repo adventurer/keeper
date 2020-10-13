@@ -56,7 +56,7 @@ func main() {
 	}
 
 	log.Println(string(cfgString))
-	ioutil.WriteFile("/root/keeper/config.json", cfgString, 0666)
+	ioutil.WriteFile("./config.json", cfgString, 0666)
 
 	// var outInfo bytes.Buffer
 	// cmd := exec.Command("/etc/init.d/shadowsocks-libev", "restart")
