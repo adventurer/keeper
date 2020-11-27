@@ -21,7 +21,7 @@ func Init() {
 		psnet, _ := net.IOCounters(true)
 		for _, item := range psnet {
 
-			if item.Name == "eth0" {
+			if item.Name == config.Config.Eth {
 
 				i++
 				recive += (item.BytesRecv - reciveTmp)

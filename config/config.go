@@ -5,5 +5,6 @@ var Config struct {
 	Ip        string
 	Port      int
 	Pass      string
+	Eth       string
 	BandWidth int
 }

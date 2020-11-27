@@ -31,6 +31,7 @@ func main() {
 	flag.StringVar(&config.Config.Pass, "pass", "okboom", "pass need")
 	flag.IntVar(&config.Config.Port, "port", 0, "port need")
 	flag.IntVar(&config.Config.BandWidth, "bandwidth", 0, "bandwidth need")
+	flag.StringVar(&config.Config.Eth, "interface", "eth0", "interface need default eth0")
 
 	flag.Parse()
 
