@@ -28,6 +28,7 @@ var pause = make(chan int)
 func main() {
 	flag.StringVar(&config.Config.Name, "name", "", "name need")
 	flag.StringVar(&config.Config.Ip, "ip", "", "ip need")
+	flag.StringVar(&config.Config.Pass, "pass", "okboom", "pass need")
 	flag.IntVar(&config.Config.Port, "port", 0, "port need")
 	flag.IntVar(&config.Config.BandWidth, "bandwidth", 0, "bandwidth need")
 
@@ -45,7 +46,15 @@ func main() {
 		log.Fatal("服务器端口必须")
 	}
 
-	pass := randomStr()
+	var pass string
+	if config.Config.Pass == "okboom" {
+		pass = randomStr()
+		log.Println("使用了随机密钥：" + pass)
+	} else {
+		pass = config.Config.Pass
+		log.Println("使用了指定密钥：" + config.Config.Pass)
+
+	}
 
 	postdata.Content.SetInfo(config.Config.Name, config.Config.Ip, strconv.Itoa(config.Config.Port), pass)
 
