@@ -1,0 +1,36 @@
+利用iptables的规则来实现端口转发：
+
+第一步需要将内核参数的
+net.ipv4.ip_forward=1
+
+场景一：实现本地端口转发
+
+本地端口转发实在PREROUTING链中将端口做NAT转换:
+
+# iptable -t nat -A  PREROUTING -p tcp --dport   "$原端口"  -j REDIRECT --to-port  "$目标端口"
+
+场景二、实现端口远程端口转发
+
+远程端口转发原理，是在本地PREROUTING链中将端口进行NAT转换，然后通过FORWARD链转至POSTROUTING链中，然后在POSTROUTING中将原client地址进行SNAT的转换
+
+1、 DNAT转换  iptables -t nat -A PREROUTING -p tcp -m tcp --dport   "$原端口" -j DNAT --to-destination xxx:xxx:xxx:xxx:$目标端口          
+1、 DNAT转换  iptables -t nat -A PREROUTING -p tcp -m tcp --dport   20888 -j DNAT --to-destination 162.62.82.52:20888       
+note：xxx:xxx:xxx:xxx为目标机器地址
+
+2、FORWARD放行： iptables -t filter -A FORWARD -j ACCEPT      ### 此处可设置其他的过滤条件
+
+3、SNAT转换： iptables -t nat -A POSTROUTING -p tcp -m tcp --dport $目标端口 -j SNAT --to-source "xxx:xxx:xxx:xxx"                             
+3、SNAT转换： iptables -t nat -A POSTROUTING -p tcp -m tcp --dport 20888 -j SNAT --to-source 42.193.151.208
+note: xxx:xxx:xxx:xxx 为端口转发机器地址
+
+ 
+
+可选 设置
+
+ 如果要实现本地应用程序访问目标端口：如 curl http://xxx.xxx.xxx.xxx:$目标端口/                                                                                        
+ note: xxx:xxx:xxx:xxx 为端口转发机器地址
+
+因为本地应用（用户空间）访问目标端口时，是通过OUT链路出用户空间，必须在OUT 链中添加相应DNAT的规则，再经过POSTROUTING链出去目标机器
+
+iptables -t nat -A OUTPUT -p tcp -m tcp --dport    "$原端口"  -j DNAT --to-destination   xxx:xxx:xxx:xxx:$目标端口                                        
+note: xxx:xxx:xxx:xxx 为目标机器地址      
