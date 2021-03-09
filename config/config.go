@@ -7,4 +7,5 @@ var Config struct {
 	Pass      string
 	Eth       string
 	BandWidth int
+	Mode      int
 }

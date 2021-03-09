@@ -17,6 +17,7 @@ type ReportData struct {
 	Port   string
 	Pass   string
 	Load   float64
+	Mode   int
 	lock   sync.Mutex
 }
 
@@ -36,6 +37,7 @@ func Init() {
 				"Recive":   Content.Recive,
 				"Send":     Content.Send,
 				"Load":     Content.Load,
+				"Mode":     Content.Mode,
 			})
 			body, err := res.Body()
 			if err != nil {
@@ -56,11 +58,12 @@ func (p *ReportData) SetTraffic(recive, send uint64) {
 	p.Load = float64(send) / (float64(config.Config.BandWidth) * 1024)
 }
 
-func (p *ReportData) SetInfo(Name, Ip, Port, Pass string) {
+func (p *ReportData) SetInfo(Name, Ip, Port, Pass string, mode int) {
 	defer p.lock.Unlock()
 	p.lock.Lock()
 	p.Name = Name
 	p.Ip = Ip
 	p.Port = Port
 	p.Pass = Pass
+	p.Mode = mode
 }

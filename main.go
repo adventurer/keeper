@@ -26,6 +26,7 @@ type serverConfig struct {
 var pause = make(chan int)
 
 func main() {
+	flag.IntVar(&config.Config.Mode, "mode", 0, "name need 1sudo 2jianrong")
 	flag.StringVar(&config.Config.Name, "name", "", "name need")
 	flag.StringVar(&config.Config.Ip, "ip", "", "ip need")
 	flag.StringVar(&config.Config.Pass, "pass", "okboom", "pass need")
@@ -34,6 +35,10 @@ func main() {
 	flag.StringVar(&config.Config.Eth, "interface", "eth0", "interface need default eth0")
 
 	flag.Parse()
+
+	if config.Config.Mode == 0 {
+		log.Fatal("模式必须：1速度2兼容")
+	}
 
 	if config.Config.Name == "" {
 		log.Fatal("服务器名必须")
@@ -57,7 +62,7 @@ func main() {
 
 	}
 
-	postdata.Content.SetInfo(config.Config.Name, config.Config.Ip, strconv.Itoa(config.Config.Port), pass)
+	postdata.Content.SetInfo(config.Config.Name, config.Config.Ip, strconv.Itoa(config.Config.Port), pass, config.Config.Mode)
 
 	cfg := serverConfig{Server: "0.0.0.0", Server_port: config.Config.Port, Local_port: 1080, Password: pass, Timeout: 60, Method: "chacha20-ietf-poly1305"}
 	cfgString, err := json.Marshal(cfg)
